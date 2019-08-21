@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="sql," />
+
+
+
+
+
+  <link rel="alternate" href="../../../../../atom.xml" title="漫步小楼```" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="各种树操作， 用来查询表中带有子父节点的信息  Oracle 树操作(select…start with…connect by…prior) 1234select m.org_idfrom sm_organ mstart with m.org_id = &apos;00000&apos;connect by prior m.org_id = m.parent_org_id;  [查询org_id为‘00000’的所">
+<meta name="keywords" content="sql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle经典语法">
+<meta property="og:url" content="https://jjeian.github.io/2019/08/20/技术/oracle经典语法/index.html">
+<meta property="og:site_name" content="漫步小楼```">
+<meta property="og:description" content="各种树操作， 用来查询表中带有子父节点的信息  Oracle 树操作(select…start with…connect by…prior) 1234select m.org_idfrom sm_organ mstart with m.org_id = &apos;00000&apos;connect by prior m.org_id = m.parent_org_id;  [查询org_id为‘00000’的所">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-20T05:26:49.554Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Oracle经典语法">
+<meta name="twitter:description" content="各种树操作， 用来查询表中带有子父节点的信息  Oracle 树操作(select…start with…connect by…prior) 1234select m.org_idfrom sm_organ mstart with m.org_id = &apos;00000&apos;connect by prior m.org_id = m.parent_org_id;  [查询org_id为‘00000’的所">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jjeian.github.io/2019/08/20/技术/oracle经典语法/"/>
+
+
+
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/custom/clicklove.js"></script>
+
+
+  <title>Oracle经典语法 | 漫步小楼```</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">漫步小楼```</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jjeian.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小小">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../../../../images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漫步小楼```">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Oracle经典语法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-20T21:37:42+08:00">
+                2019-08-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-20T13:26:49+08:00">
+                2019-08-20
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../../categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span><i class="fa fa-eye"></i>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="各种树操作-用来查询表中带有子父节点的信息"><a class="markdownIt-Anchor" href="#各种树操作-用来查询表中带有子父节点的信息"></a> 各种树操作， 用来查询表中带有子父节点的信息</h2>
+<h3 id="oracle-树操作selectstart-withconnect-byprior"><a class="markdownIt-Anchor" href="#oracle-树操作selectstart-withconnect-byprior"></a> Oracle 树操作(select…start with…connect by…prior)</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> m.org_id</span><br><span class="line"><span class="keyword">from</span> sm_organ m</span><br><span class="line"><span class="keyword">start</span> <span class="keyword">with</span> m.org_id = <span class="string">'00000'</span></span><br><span class="line"><span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">prior</span> m.org_id = m.parent_org_id;  [查询org_id为‘00000’的所有父节点，并按倒叙排序]</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> root,root_leve,org_Id</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">(</span><br><span class="line"><span class="keyword">select</span> sys_connect_by_path (org_id, <span class="string">'/'</span>) <span class="keyword">as</span> <span class="keyword">PATH</span>,<span class="keyword">connect_by_root</span>(org_id) <span class="keyword">as</span> root,<span class="keyword">connect_by_root</span>(org_leve) <span class="keyword">as</span> root_leve,t.*</span><br><span class="line"><span class="keyword">from</span> sm_ORGAN t</span><br><span class="line"><span class="keyword">start</span> <span class="keyword">with</span> org_leve <span class="keyword">IN</span> (<span class="string">'3'</span>)</span><br><span class="line"><span class="keyword">connect</span> <span class="keyword">by</span> <span class="keyword">NOCYCLE</span> parent_org_id = <span class="keyword">prior</span> org_id</span><br><span class="line">) a ;</span><br></pre></td></tr></table></figure>
+<h3 id="模糊查询是连接符"><a class="markdownIt-Anchor" href="#模糊查询是连接符"></a> 模糊查询(||是连接符)</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SUB.AU_OPER LIKE '%'||<span class="comment">#auOper#||'%' AND</span></span><br></pre></td></tr></table></figure>
+<h3 id="oracle数据库中日期进行比较"><a class="markdownIt-Anchor" href="#oracle数据库中日期进行比较"></a> oracle数据库中日期进行比较</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">createDate  = to_date(sysdate,'yy-MM-dd hh24:mi:ss')   </span><br><span class="line">或者直接比较    createDate &gt; '2013-09-08 00:00:00'   </span><br><span class="line">或者 createDate  = to_date('','yyyyMMdd')    </span><br><span class="line">或者  createDate = date'2016-09-09'</span><br></pre></td></tr></table></figure>
+<h3 id="oracle数据库中chr-ascii-asciistr-convert函数的使用-nvl"><a class="markdownIt-Anchor" href="#oracle数据库中chr-ascii-asciistr-convert函数的使用-nvl"></a> Oracle数据库中chr()、ascii()、asciistr()、convert()函数的使用    ,nvl()</h3>
+<ul>
+<li>nvl(字段名,‘判断字段如果为空的话这里填你想要替换的值’)</li>
+<li>to_date( NVL2(T1.txdonetime, substr(T1.txdonetime,0,14), ‘’),‘yyyy-MM-dd hh24:mi:ss’) txdonetime ,  varchar2类型日期转换date</li>
+<li>nvl(字段,‘NA’)</li>
+<li>意思如果字段为空则输出NA的字符串</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 将查询字段中的name名称中部分汉字转换成想要的结果</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">replace</span>(</span><br><span class="line">            <span class="keyword">replace</span>(</span><br><span class="line">                  <span class="keyword">replace</span>(<span class="string">'xxxxxxxxxxxxxxxxxxxxx'</span>, <span class="string">''</span>|| <span class="keyword">chr</span>(<span class="number">15</span>xxxx92) || <span class="keyword">chr</span>(<span class="number">1524</span>xx81) ||<span class="keyword">chr</span>(<span class="number">1</span>xxxx521) || <span class="keyword">chr</span>(<span class="number">15</span>xxxx814) ||<span class="keyword">chr</span>(<span class="number">1</span>xxxx592) || <span class="string">''</span>, <span class="string">''</span>),</span><br><span class="line">                       <span class="string">''</span>|| <span class="keyword">chr</span>(<span class="number">1</span>xxxx02) || <span class="keyword">chr</span>(<span class="number">1</span>xxxx485) || <span class="keyword">chr</span>(<span class="number">149</span>xxxx48) || <span class="keyword">chr</span>(<span class="number">14</span>xxxx6) || <span class="keyword">chr</span>(<span class="number">153</span>xxxx92) || <span class="string">''</span>, <span class="string">''</span>),</span><br><span class="line">                       <span class="string">''</span>|| <span class="keyword">chr</span>(<span class="number">150</span>xxxx3) || <span class="keyword">chr</span>(<span class="number">15</span>xxxxx425) || <span class="keyword">chr</span>(x770xxx2) ||<span class="keyword">chr</span>(<span class="number">15</span>xxxx08) || <span class="string">''</span>, <span class="string">''</span>) ORG_xxxx</span><br><span class="line">  <span class="keyword">FROM</span> SMS_xxxxx ORG</span><br><span class="line"> <span class="keyword">WHERE</span> <span class="number">1</span> = <span class="number">1</span></span><br><span class="line">   <span class="keyword">AND</span> ORG_xxxx = <span class="string">'0951'</span> ;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">select</span>   <span class="string">''</span>|| <span class="keyword">chr</span>(<span class="number">15252223392</span>) ||<span class="keyword">chr</span>(<span class="number">1225303592</span>) || <span class="string">''</span>  aa  <span class="keyword">from</span>  dual;  <span class="comment">-- 拼接字符串</span></span><br><span class="line"><span class="keyword">select</span>  <span class="keyword">ascii</span>(<span class="string">'国'</span>) aa <span class="keyword">from</span> dual;    <span class="comment">-- 将汉字转为数字</span></span><br><span class="line"><span class="keyword">select</span>  <span class="keyword">chr</span>(<span class="number">15047613</span>)  bb  <span class="keyword">from</span>   dual;     <span class="comment">--将数字转为汉字</span></span><br><span class="line"><span class="keyword">select</span>   <span class="keyword">replace</span>(<span class="string">'111123224455'</span>, <span class="string">'22'</span> , <span class="string">'44'</span>)   aa  <span class="keyword">from</span>  dual;  <span class="comment">--替换字符串中的字符</span></span><br><span class="line"><span class="keyword">select</span>  asciistr(<span class="string">'国汉字之都'</span>)  aa <span class="keyword">from</span>  dual;     <span class="comment">--将一串字符串转为中文编码 \56FD\6C49\5B57\4E4B\90FD</span></span><br><span class="line"><span class="keyword">select</span>  <span class="keyword">convert</span>(<span class="string">'在中国'</span>,<span class="string">'zhs16gbk'</span>,<span class="string">'utf8'</span>) aa  <span class="keyword">from</span>    dual;   <span class="comment">--将字符串从一种字符转为另一种字符</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用-wm_concatususeer_id-函数可以将单组查询结果转为一列一行-数据中间用-分隔"><a class="markdownIt-Anchor" href="#使用-wm_concatususeer_id-函数可以将单组查询结果转为一列一行-数据中间用-分隔"></a> 使用 WM_CONCAT(us.USeER_ID)  函数可以将单组查询结果转为一列一行, 数据中间用 &quot; , &quot;分隔</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span>   WM_CONCAT(us.USeER_ID) <span class="keyword">USERS</span>  <span class="keyword">from</span>  sm_euser  us   <span class="keyword">where</span>  us.oreg_id = <span class="string">'0200'</span> ;</span><br></pre></td></tr></table></figure>
+<h3 id="建表之前先判断表是否存在-若存在则删除"><a class="markdownIt-Anchor" href="#建表之前先判断表是否存在-若存在则删除"></a> 建表之前先判断表是否存在 , 若存在,则删除</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">declare</span></span><br><span class="line">      <span class="keyword">num</span>   <span class="built_in">number</span>;</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">select</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">into</span> <span class="keyword">num</span> <span class="keyword">from</span> user_tables <span class="keyword">where</span> table_name = <span class="keyword">upper</span>(<span class="string">'sys_area'</span>) ;</span><br><span class="line">    if num &gt; 0 then</span><br><span class="line">        <span class="keyword">execute</span> <span class="keyword">immediate</span> <span class="string">'drop table sys_area'</span> ;</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">if</span>;</span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="使用oracle若信息存在则更新-若不存在-则插入-merge-into-大数据量的话可以使用这个优化"><a class="markdownIt-Anchor" href="#使用oracle若信息存在则更新-若不存在-则插入-merge-into-大数据量的话可以使用这个优化"></a> 使用oracle若信息存在,则更新, 若不存在, 则插入 [merge into 大数据量的话可以使用这个优化]</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">merge</span> <span class="keyword">into</span> BOS_PARA_CONL_RULES a</span><br><span class="line"><span class="keyword">using</span> bos_para_codel_info b</span><br><span class="line"><span class="keyword">on</span> (a.modeel_no = b.model_no)</span><br><span class="line"><span class="keyword">when</span> <span class="keyword">MATCHED</span> <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">update</span></span><br><span class="line">     <span class="keyword">set</span> trade_system = <span class="comment">#tradeSystem#,</span></span><br><span class="line">         trade_name   = <span class="comment">#tradeName#,</span></span><br><span class="line">         note         = <span class="comment">#Note#,</span></span><br><span class="line">         system_basis = <span class="comment">#systemBasis#</span></span><br><span class="line">   <span class="keyword">where</span> b.modeel_no = <span class="comment">#modelNo#</span></span><br><span class="line"><span class="keyword">When</span> <span class="keyword">not</span> <span class="keyword">matched</span> <span class="keyword">then</span></span><br><span class="line">  <span class="keyword">insert</span></span><br><span class="line">    (TRADE_SYSTEM,</span><br><span class="line">     TRADE_NAME,</span><br><span class="line">     NOTE,</span><br><span class="line">     SYSTEM_BASIS)</span><br><span class="line">  <span class="keyword">values</span></span><br><span class="line">    (<span class="comment">#tradeSystem#,</span></span><br><span class="line">     <span class="comment">#tradeName#,</span></span><br><span class="line">     <span class="comment">#Note#,</span></span><br><span class="line">     <span class="comment">#systemBasis#) where b.modeel_no = #modelNo#</span></span><br></pre></td></tr></table></figure>
+<h3 id="trunc-函数的用法"><a class="markdownIt-Anchor" href="#trunc-函数的用法"></a> TRUNC 函数的用法</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--1 </span></span><br><span class="line">TRUNC（date[,fmt]）</span><br><span class="line">　TRUNC（TO_DATE（'24-Nov-1999 08:37 pm','dd-mon-yyyy hh:mi am'），'hh'） ='24-Nov-1999 08:00:00 am'</span><br><span class="line"></span><br><span class="line">　　trunc（sysdate,'yyyy'） <span class="comment">--返回当年第一天。</span></span><br><span class="line">　　trunc（sysdate,'mm'） <span class="comment">--返回当月第一天。</span></span><br><span class="line">　　trunc（sysdate,'d'） <span class="comment">--返回当前星期的第一天。</span></span><br><span class="line">　　trunc（sysdate,'dd'）<span class="comment">--返回当前年月日</span></span><br><span class="line"><span class="comment">--2</span></span><br><span class="line">TRUNC（for number）</span><br><span class="line">　TRUNC（number[,decimals]）</span><br><span class="line">　　其中：</span><br><span class="line">　　number 待做截取处理的数值</span><br><span class="line">　　decimals 指明需保留小数点后面的位数。可选项，忽略它则截去所有的小数部分</span><br><span class="line"></span><br><span class="line">　　下面是该函数的使用情况：</span><br><span class="line">　　TRUNC（89.985，2）=89.98</span><br><span class="line">　　TRUNC（89.985）=89</span><br><span class="line">　　TRUNC（89.985，-1）=80</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意：第二个参数可以为负数，表示为小数点左边指定位数后面的部分截去，即均以0记。与取整类似，比如参数为1即取整到十分位，如果是-1，则是取整到十位，以此类推。</li>
+</ul>
+<h3 id="oracle-trunc函数的用法"><a class="markdownIt-Anchor" href="#oracle-trunc函数的用法"></a> Oracle trunc()函数的用法</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--日期</span></span><br><span class="line">1.select trunc(sysdate) from dual  <span class="comment">--2011-3-18  今天的日期为2011-3-18</span></span><br><span class="line">2.select trunc(sysdate, 'mm')   from   dual  <span class="comment">--2011-3-1    返回当月第一天.</span></span><br><span class="line">3.select trunc(sysdate,'yy') from dual  <span class="comment">--2011-1-1       返回当年第一天</span></span><br><span class="line">4.select trunc(sysdate,'dd') from dual  <span class="comment">--2011-3-18    返回当前年月日</span></span><br><span class="line">5.select trunc(sysdate,'yyyy') from dual  <span class="comment">--2011-1-1   返回当年第一天</span></span><br><span class="line">6.select trunc(sysdate,'d') from dual  <span class="comment">--2011-3-13 (星期天)返回当前星期的第一天</span></span><br><span class="line">7.select trunc(sysdate, 'hh') from dual   <span class="comment">--2011-3-18 14:00:00   当前时间为14:41  </span></span><br><span class="line">8.select trunc(sysdate, 'mi') from dual  <span class="comment">--2011-3-18 14:41:00   TRUNC()函数没有秒的精确</span></span><br><span class="line"><span class="comment">--数字</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">TRUNC（number,num_digits）</span></span><br><span class="line"><span class="comment">Number 需要截尾取整的数字。</span></span><br><span class="line"><span class="comment">Num_digits 用于指定取整精度的数字。Num_digits 的默认值为 0。</span></span><br><span class="line"><span class="comment">TRUNC()函数截取时不进行四舍五入</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">9. <span class="keyword">select</span> trunc(<span class="number">123.458</span>) <span class="keyword">from</span> dual <span class="comment">--123</span></span><br><span class="line"><span class="number">10.</span><span class="keyword">select</span> trunc(<span class="number">123.458</span>,<span class="number">0</span>) <span class="keyword">from</span> dual <span class="comment">--123</span></span><br><span class="line"><span class="number">11.</span><span class="keyword">select</span> trunc(<span class="number">123.458</span>,<span class="number">1</span>) <span class="keyword">from</span> dual <span class="comment">--123.4</span></span><br><span class="line"><span class="number">12.</span><span class="keyword">select</span> trunc(<span class="number">123.458</span>,<span class="number">-1</span>) <span class="keyword">from</span> dual <span class="comment">--120</span></span><br><span class="line"><span class="number">13.</span><span class="keyword">select</span> trunc(<span class="number">123.458</span>,<span class="number">-4</span>) <span class="keyword">from</span> dual <span class="comment">--0</span></span><br><span class="line"><span class="number">14.</span><span class="keyword">select</span> trunc(<span class="number">123.458</span>,<span class="number">4</span>) <span class="keyword">from</span> dual  <span class="comment">--123.458</span></span><br><span class="line"><span class="number">15.</span><span class="keyword">select</span> trunc(<span class="number">123</span>) <span class="keyword">from</span> dual  <span class="comment">--123</span></span><br><span class="line"><span class="number">16.</span><span class="keyword">select</span> trunc(<span class="number">123</span>,<span class="number">1</span>) <span class="keyword">from</span> dual <span class="comment">--123</span></span><br><span class="line"><span class="number">17.</span><span class="keyword">select</span> trunc(<span class="number">123</span>,<span class="number">-1</span>) <span class="keyword">from</span> dual <span class="comment">--120</span></span><br></pre></td></tr></table></figure>
+<h3 id="创建序列"><a class="markdownIt-Anchor" href="#创建序列"></a> 创建序列</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">sequence</span> SEQ_xxOS_AUxxxED_FB_ID</span><br><span class="line"><span class="keyword">minvalue</span> <span class="number">1</span></span><br><span class="line">maxvalue <span class="number">99999999999999999999</span></span><br><span class="line"><span class="keyword">start</span> <span class="keyword">with</span> <span class="number">669408473</span></span><br><span class="line"><span class="keyword">increment</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">cache</span> <span class="number">20</span></span><br><span class="line"><span class="keyword">cycle</span>;</span><br><span class="line"><span class="comment">--SEQUENCE</span></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span>, <span class="keyword">ALTER</span> <span class="keyword">ON</span> SEQ_xxOS_AUxxxED_FB_IDxxOxxxETL;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span>, <span class="keyword">ALTER</span> <span class="keyword">ON</span> SEQ_xxOS_AUxxxED_FB_IDxxxxxR;</span><br><span class="line"><span class="comment">--SEQUENCE SYNONYM</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">PUBLIC</span> <span class="keyword">SYNONYM</span> SEQ_xxOS_AUxxxED_FB_IDFOR sxxS.SEQ_xxOS_AUxxxED_FB_ID;</span><br></pre></td></tr></table></figure>
+<h3 id="动态菜单权限至少需要5张表"><a class="markdownIt-Anchor" href="#动态菜单权限至少需要5张表"></a> 动态菜单权限(至少需要5张表)</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> xx_mxenu;           //菜单表 </span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> xx_UxER;          //用户表</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> xx_SSxTEM_ROxLE;   //角色表</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> xx_USxER_ROxLE;      //用户角色表</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> xxEF_RxLE_MExNU;    //角色菜单表</span><br></pre></td></tr></table></figure>
+<h3 id="字典表可以做成2张表-一张存储该字典字段的主题id-另一张存放该主题id需要存储那些字典字段"><a class="markdownIt-Anchor" href="#字典表可以做成2张表-一张存储该字典字段的主题id-另一张存放该主题id需要存储那些字典字段"></a> 字典表可以做成2张表, 一张存储该字典字段的主题id, 另一张存放该主题id需要存储那些字典字段</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> bos_comm_field f <span class="keyword">where</span> f.field_name=<span class="string">'GET_CHECK_TYPE'</span>;</span><br><span class="line"> <span class="keyword">select</span> * <span class="keyword">from</span> bos_comm_code C <span class="keyword">WHERE</span> C.CODE_TYPE=<span class="string">'CHECK_TYPE'</span> ;</span><br></pre></td></tr></table></figure>
+<h3 id="oracle的配置文件tnsnamesora-里面内容可以改下自定义的-例如下面开发库这么一长串数据库-左边的可以自定义-然后连接的时候数据库框就填左边的相当于右边的一长串"><a class="markdownIt-Anchor" href="#oracle的配置文件tnsnamesora-里面内容可以改下自定义的-例如下面开发库这么一长串数据库-左边的可以自定义-然后连接的时候数据库框就填左边的相当于右边的一长串"></a> oracle的配置文件tnsnames.ora 里面内容可以改下自定义的, 例如下面开发库这么一长串数据库, =左边的可以自定义, 然后连接的时候数据库框就填左边的,相当于=右边的一长串</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10.10.10.100 = (DESCRIPTION =(ADDRESS=(PROTOCOL=TCP) (HOST = 10.10.10.100) (PORT=1234))(CONNECT_DATA=(SID=oredd)))  </span><br><span class="line"> xxx/123456</span><br></pre></td></tr></table></figure>
+<h3 id="oracles数据库中创建表-并赋予其他角色权限"><a class="markdownIt-Anchor" href="#oracles数据库中创建表-并赋予其他角色权限"></a> oracles数据库中创建表, 并赋予其他角色权限</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--SYNONYM</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">PUBLIC</span> <span class="keyword">SYNONYM</span> xxxxxx表名  <span class="keyword">FOR</span> 库名.xxxxxx表名;</span><br><span class="line"><span class="comment">-- GRANT/REVOKE OBJECT PRIVILEGES </span></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">SELECT</span>, <span class="keyword">INSERT</span>, <span class="keyword">UPDATE</span>, <span class="keyword">DELETE</span> <span class="keyword">ON</span> xxxxxx表名 <span class="keyword">TO</span> 用户名;</span><br></pre></td></tr></table></figure>
+<h3 id="id取值序列日期串"><a class="markdownIt-Anchor" href="#id取值序列日期串"></a> id取值（序列+日期串）</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span>   to_char(<span class="keyword">sysdate</span>, <span class="string">'yyyymmdd'</span>)||<span class="keyword">lpad</span>(seq_xxxxxtem_id.nextval,<span class="number">15</span>, <span class="string">'0'</span>)   <span class="keyword">from</span>  dual;</span><br></pre></td></tr></table></figure>
+<h3 id="存储过程中删除表"><a class="markdownIt-Anchor" href="#存储过程中删除表"></a> 存储过程中删除表</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">EXECUTE</span> <span class="keyword">IMMEDIATE</span> <span class="string">'TRUNCATE TABLE TEMP_ITEM_ACC'</span>;</span><br></pre></td></tr></table></figure>
+<p>未完后续补充中。。。。。。。。。。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/header.jpg" alt="小小 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>行走在路上。。。。。</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>是否对您有帮助？举起小手赞赏一下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatmoney.jpg" alt="小小 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zifubaomoney.jpg" alt="小小 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="../../../../../tags/sql/" rel="tag"># sql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../Mkdown 语法整理/" rel="next" title="Mkdown 简单语法">
+                <i class="fa fa-chevron-left"></i> Mkdown 简单语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../rocketmq简单搭建/" rel="prev" title="Mq集群方式搭建">
+                Mq集群方式搭建 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="../../../../../images/header.jpg"
+                alt="小小" />
+            
+              <p class="site-author-name" itemprop="name">小小</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="../../../../../archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="../../../../../atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yourname" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yourname@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/yourname" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://jjeian.github.io" title="漫步小楼```" target="_blank">漫步小楼```</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/weixin_31629877" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#各种树操作-用来查询表中带有子父节点的信息"><span class="nav-number">1.</span> <span class="nav-text"> 各种树操作， 用来查询表中带有子父节点的信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#oracle-树操作selectstart-withconnect-byprior"><span class="nav-number">1.1.</span> <span class="nav-text"> Oracle 树操作(select…start with…connect by…prior)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模糊查询是连接符"><span class="nav-number">1.2.</span> <span class="nav-text"> 模糊查询(||是连接符)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oracle数据库中日期进行比较"><span class="nav-number">1.3.</span> <span class="nav-text"> oracle数据库中日期进行比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oracle数据库中chr-ascii-asciistr-convert函数的使用-nvl"><span class="nav-number">1.4.</span> <span class="nav-text"> Oracle数据库中chr()、ascii()、asciistr()、convert()函数的使用    ,nvl()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-wm_concatususeer_id-函数可以将单组查询结果转为一列一行-数据中间用-分隔"><span class="nav-number">1.5.</span> <span class="nav-text"> 使用 WM_CONCAT(us.USeER_ID)  函数可以将单组查询结果转为一列一行, 数据中间用 &quot; , &quot;分隔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建表之前先判断表是否存在-若存在则删除"><span class="nav-number">1.6.</span> <span class="nav-text"> 建表之前先判断表是否存在 , 若存在,则删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用oracle若信息存在则更新-若不存在-则插入-merge-into-大数据量的话可以使用这个优化"><span class="nav-number">1.7.</span> <span class="nav-text"> 使用oracle若信息存在,则更新, 若不存在, 则插入 [merge into 大数据量的话可以使用这个优化]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trunc-函数的用法"><span class="nav-number">1.8.</span> <span class="nav-text"> TRUNC 函数的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oracle-trunc函数的用法"><span class="nav-number">1.9.</span> <span class="nav-text"> Oracle trunc()函数的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建序列"><span class="nav-number">1.10.</span> <span class="nav-text"> 创建序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态菜单权限至少需要5张表"><span class="nav-number">1.11.</span> <span class="nav-text"> 动态菜单权限(至少需要5张表)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典表可以做成2张表-一张存储该字典字段的主题id-另一张存放该主题id需要存储那些字典字段"><span class="nav-number">1.12.</span> <span class="nav-text"> 字典表可以做成2张表, 一张存储该字典字段的主题id, 另一张存放该主题id需要存储那些字典字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oracle的配置文件tnsnamesora-里面内容可以改下自定义的-例如下面开发库这么一长串数据库-左边的可以自定义-然后连接的时候数据库框就填左边的相当于右边的一长串"><span class="nav-number">1.13.</span> <span class="nav-text"> oracle的配置文件tnsnames.ora 里面内容可以改下自定义的, 例如下面开发库这么一长串数据库, =左边的可以自定义, 然后连接的时候数据库框就填左边的,相当于=右边的一长串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oracles数据库中创建表-并赋予其他角色权限"><span class="nav-number">1.14.</span> <span class="nav-text"> oracles数据库中创建表, 并赋予其他角色权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#id取值序列日期串"><span class="nav-number">1.15.</span> <span class="nav-text"> id取值（序列+日期串）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储过程中删除表"><span class="nav-number">1.16.</span> <span class="nav-text"> 存储过程中删除表</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">漫步小楼```</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">47.9k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+<p>
+   <span id="timeDate" style="font-size:10px;">载入天数...</span><span id="times" style="font-size:10px;">载入时分秒...</span>
+    <script>
+        var now = new Date();
+        function createtime() {
+            var grt= new Date("1/6/2019 01:10:00");//此处修改你的建站时间或者网站上线时间
+            now.setTime(now.getTime()+250);
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+            document.getElementById("timeDate").innerHTML = "本站已安全运行"+dnum+"天";
+            document.getElementById("times").innerHTML = hnum + "时" + mnum + "分" + snum + "秒";
+        }
+    setInterval("createtime()",250);
+    </script>
+</p>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('2');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":true,"model":{"jsonPath":"/live2dw/assets/Epsilon2.1.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script>
+</body>
+</html>

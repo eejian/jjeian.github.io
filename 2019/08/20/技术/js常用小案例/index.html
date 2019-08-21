@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="js," />
+
+
+
+
+
+  <link rel="alternate" href="../../../../../atom.xml" title="漫步小楼```" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="常用javascript小案例  样式调节 123456//注: 这个可以控制td中的字段成行显示     #modelInfos td,th &amp;#123;  white-space: nowrap;   &amp;#125;//文本输入框随着内容尺寸往下变大,在input框中加入这两个属性,然后就可以控制文本输入框的大小尺寸随着内容而变onpropertychange=&quot;this.style.heig">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Js常用小案例">
+<meta property="og:url" content="https://jjeian.github.io/2019/08/20/技术/js常用小案例/index.html">
+<meta property="og:site_name" content="漫步小楼```">
+<meta property="og:description" content="常用javascript小案例  样式调节 123456//注: 这个可以控制td中的字段成行显示     #modelInfos td,th &amp;#123;  white-space: nowrap;   &amp;#125;//文本输入框随着内容尺寸往下变大,在input框中加入这两个属性,然后就可以控制文本输入框的大小尺寸随着内容而变onpropertychange=&quot;this.style.heig">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-20T05:26:02.163Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Js常用小案例">
+<meta name="twitter:description" content="常用javascript小案例  样式调节 123456//注: 这个可以控制td中的字段成行显示     #modelInfos td,th &amp;#123;  white-space: nowrap;   &amp;#125;//文本输入框随着内容尺寸往下变大,在input框中加入这两个属性,然后就可以控制文本输入框的大小尺寸随着内容而变onpropertychange=&quot;this.style.heig">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jjeian.github.io/2019/08/20/技术/js常用小案例/"/>
+
+
+
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/custom/clicklove.js"></script>
+
+
+  <title>Js常用小案例 | 漫步小楼```</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">漫步小楼```</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jjeian.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小小">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../../../../images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漫步小楼```">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Js常用小案例</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-20T21:37:42+08:00">
+                2019-08-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-20T13:26:02+08:00">
+                2019-08-20
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../../categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span><i class="fa fa-eye"></i>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="常用javascript小案例"><a class="markdownIt-Anchor" href="#常用javascript小案例"></a> 常用javascript小案例</h2>
+<h4 id="样式调节"><a class="markdownIt-Anchor" href="#样式调节"></a> 样式调节</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注: 这个可以控制td中的字段成行显示     </span></span><br><span class="line">#modelInfos td,th &#123;  white-space: nowrap;   &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//文本输入框随着内容尺寸往下变大,在input框中加入这两个属性,然后就可以控制文本输入框的大小尺寸随着内容而变</span></span><br><span class="line">onpropertychange=<span class="string">"this.style.height=this.scrollHeight + 'px'"</span> </span><br><span class="line">oninput=<span class="string">"this.style.height=this.scrollHeight + 'px'"</span></span><br></pre></td></tr></table></figure>
+<h4 id="点击radio-选择一整行这种写法不太靠谱可以试试"><a class="markdownIt-Anchor" href="#点击radio-选择一整行这种写法不太靠谱可以试试"></a> 点击radio  选择一整行(这种写法不太靠谱，可以试试)</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">style=<span class="string">"cursor: hand"</span> </span><br><span class="line">bgcolor=<span class="string">"&lt;%=(obj.getState() == 0 ? trColor : obj.getState() == 1 ? '#FFCC33' : '#FF8040')%&gt;"</span>  onclick=<span class="string">"selectRow(&lt;%=i%&gt;,this);"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 注: 另一种写法 双击选中一行[单击不可以</span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> screenSize = <span class="built_in">window</span>.screen.width<span class="number">-200</span>;</span><br><span class="line">    <span class="keyword">var</span> div1 = <span class="built_in">document</span>.getElementById(<span class="string">'pool'</span>);    </span><br><span class="line">    div1.style.width = screenSize;  </span><br><span class="line">    $(<span class="string">'tr'</span>).dblclick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       $td = $(<span class="keyword">this</span>).find(<span class="string">"td:eq(0)"</span>).find(<span class="string">"input[type=radio]"</span>).attr(<span class="string">"checked"</span>, <span class="literal">true</span>);</span><br><span class="line">       <span class="keyword">var</span> varId = $(<span class="keyword">this</span>).attr(<span class="string">"id"</span>);</span><br><span class="line">       <span class="keyword">if</span>($(<span class="keyword">this</span>).attr(<span class="string">"id"</span>).length&gt;<span class="number">3</span>)&#123;</span><br><span class="line">           <span class="keyword">var</span> str = varId.substr(<span class="number">0</span>,<span class="number">3</span>);</span><br><span class="line">           <span class="keyword">if</span>(str==<span class="string">'row'</span>)&#123;</span><br><span class="line">              startDealTask();  </span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="当前条件所在的行的颜色为红色"><a class="markdownIt-Anchor" href="#当前条件所在的行的颜色为红色"></a> 当前条件所在的行的颜色为红色</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> $(<span class="string">"tr"</span>,$(<span class="string">"#gxzItems"</span>)).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> itemFlag=$(<span class="string">"input[name='flagTY']"</span>,$(<span class="keyword">this</span>)).val();</span><br><span class="line">	<span class="keyword">if</span>(itemFlag==<span class="string">'0'</span>)&#123;</span><br><span class="line">		$(<span class="string">"td"</span>, $(<span class="keyword">this</span>)).css(&#123;<span class="string">"color"</span>:<span class="string">"red"</span>&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="格式化金额"><a class="markdownIt-Anchor" href="#格式化金额"></a> 格式化金额</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;fmt:formatNumber pattern=<span class="string">"#,##0.00#"</span> value=<span class="string">"$&#123;pto1.map.tradeAmt&#125;"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="写弹窗标题div中需要加入的样式"><a class="markdownIt-Anchor" href="#写弹窗标题div中需要加入的样式"></a> 写弹窗(标题div中需要加入的样式)</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">style=<span class="string">"display: none; z-index: 9997; border-width: 1px; border-style: solid; border-color: navy; position: absolute; left: 250px; top: 103px; background-color: #ffffff; width: 350px; height: 115px; filter: progid :DXImageTransform.Microsoft.Shadow(color =#999999, direction =135, strength = 5);"</span></span><br></pre></td></tr></table></figure>
+<h4 id="支持拖拽"><a class="markdownIt-Anchor" href="#支持拖拽"></a> 支持拖拽</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">oTitle.onmousedown=<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123; </span><br><span class="line">    oTitle.style.cursor = <span class="string">"move"</span>; </span><br><span class="line">     <span class="keyword">var</span> event = event || <span class="built_in">window</span>.event; </span><br><span class="line">     <span class="keyword">var</span> disX=event.clientX-oDrag.offsetLeft; </span><br><span class="line">     <span class="keyword">var</span> disY=event.clientY-oDrag.offsetTop; </span><br><span class="line">     </span><br><span class="line">     <span class="comment">// 鼠标移动，窗口随之移动,  onmousemove在有物体移动是才执行alert事件；  </span></span><br><span class="line">	 <span class="built_in">document</span>.onmousemove=<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123; </span><br><span class="line">         <span class="keyword">var</span> event = event || <span class="built_in">window</span>.event; </span><br><span class="line">         maxW=<span class="built_in">document</span>.documentElement.clientWidth-oDrag.offsetWidth; </span><br><span class="line">         maxH=<span class="built_in">document</span>.documentElement.clientHeight-oDrag.offsetHeight; </span><br><span class="line">         posX=event.clientX-disX; </span><br><span class="line">         posY=event.clientY-disY; </span><br><span class="line">         <span class="keyword">if</span>(posX&lt;<span class="number">0</span>)&#123; </span><br><span class="line">             posX=<span class="number">0</span>; </span><br><span class="line">         &#125;<span class="keyword">else</span> <span class="keyword">if</span>(posX&gt;maxW)&#123; </span><br><span class="line">             posX=maxW; </span><br><span class="line">         &#125; </span><br><span class="line">         <span class="keyword">if</span>(posY&lt;<span class="number">0</span>)&#123; </span><br><span class="line">             posY=<span class="number">0</span>; </span><br><span class="line">         &#125;<span class="keyword">else</span> <span class="keyword">if</span>(posY&gt;maxH)&#123; </span><br><span class="line">             posY=maxH; </span><br><span class="line">         &#125; </span><br><span class="line">         oDrag.style.left=posX+<span class="string">'px'</span>; </span><br><span class="line">         oDrag.style.top=posY+<span class="string">'px'</span>; </span><br><span class="line">     &#125; </span><br><span class="line">     <span class="comment">//鼠标松开，窗口将不再移动 , document.onmouseup=function()&#123; </span></span><br><span class="line">         <span class="built_in">document</span>.onmousemove=<span class="literal">null</span>; </span><br><span class="line">         <span class="built_in">document</span>.onmouseup=<span class="literal">null</span>; </span><br><span class="line">     &#125; </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="测试用户点击关闭浏览器事件回到数据库中执行一条语句"><a class="markdownIt-Anchor" href="#测试用户点击关闭浏览器事件回到数据库中执行一条语句"></a> 测试用户点击关闭浏览器,事件回到数据库中执行一条语句</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span></span><br><span class="line">	src=<span class="string">"&lt;c:url value='/js/jquery-1.8.3.js'/&gt;"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	<span class="built_in">window</span>.onbeforeunload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) //<span class="title">author</span>: <span class="title">meizz</span> </span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> n = <span class="built_in">window</span>.event.screenX - <span class="built_in">window</span>.screenLeft;</span><br><span class="line">		<span class="keyword">var</span> b = n &gt; <span class="built_in">document</span>.documentElement.scrollWidth - <span class="number">20</span>;</span><br><span class="line">		<span class="keyword">if</span> (b &amp;&amp; <span class="built_in">window</span>.event.clientY &lt; <span class="number">0</span> || <span class="built_in">window</span>.event.altKey) &#123;</span><br><span class="line">			$.ajax(&#123;</span><br><span class="line">				url : <span class="string">"/demo03/itemModel/onbeforeload"</span>,</span><br><span class="line">				<span class="keyword">async</span> : <span class="literal">false</span>,</span><br><span class="line">				success : <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">					alert(<span class="string">"不可能"</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="提交点击提交form表单值-则可以将结果显示在当前页面的iframe内联框中-实现页面局部刷新"><a class="markdownIt-Anchor" href="#提交点击提交form表单值-则可以将结果显示在当前页面的iframe内联框中-实现页面局部刷新"></a> 提交点击提交form表单值, 则可以将结果显示在当前页面的iframe内联框中, 实现页面局部刷新</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;form id=<span class="string">"organManageForm"</span> name=<span class="string">"organManageForm"</span> style=<span class="string">"width: 30%"</span></span><br><span class="line">			action=<span class="string">"&lt;%=com.northking.ssoClient.bussiness.impl.Parameters.pathPrefix%&gt;servlet/SmOrganListServlet"</span> method=<span class="string">"post"</span> target=<span class="string">"frmdetail"</span>&gt;</span><br><span class="line">	&lt;<span class="regexp">/form&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>div&gt;</span><br><span class="line">	&lt;<span class="regexp">/td&gt;</span></span><br><span class="line"><span class="regexp">	&lt;td width="50%" style="vertical-align: top"&gt;</span></span><br><span class="line"><span class="regexp">	&lt;div id="floater" style="position:absolute; height=300"&gt;</span></span><br><span class="line"><span class="regexp">	&lt;iframe name="frmdetail" class="" frameborder=0 style="width: 100%;height:100%;background-color:  #eeeeee;"&gt;&lt;/i</span>frame&gt;</span><br><span class="line">	&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="图片响应流到页面展示-filepath-图片路径"><a class="markdownIt-Anchor" href="#图片响应流到页面展示-filepath-图片路径"></a> 图片响应流到页面展示,  filepath = &quot;“图片路径”;</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">response.setContentType(<span class="string">"image/jpeg"</span>);</span><br><span class="line">ServletOutputStream out=response.getOutputStream();</span><br><span class="line">	<span class="keyword">try</span> &#123;	  </span><br><span class="line">		     File file = <span class="keyword">new</span> File(filePath);</span><br><span class="line">		     FileImageInputStream imageinput = <span class="keyword">new</span> FileImageInputStream(file);</span><br><span class="line">		     int data;</span><br><span class="line">	         <span class="keyword">while</span>((data=imageinput.read())!=<span class="number">-1</span>)</span><br><span class="line">	         &#123;</span><br><span class="line">	        	 out.write(data);</span><br><span class="line">	         &#125;</span><br><span class="line">	         imageinput.close();</span><br><span class="line">	  &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">		 logger.error(e);   </span><br><span class="line">	  &#125;<span class="keyword">finally</span>&#123;		     </span><br><span class="line">		  out.flush();</span><br><span class="line">		  out.close();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="使用js写cookie"><a class="markdownIt-Anchor" href="#使用js写cookie"></a> 使用js写COOKIE</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCookie</span>(<span class="params">c_name</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">document</span>.cookie.length&gt;<span class="number">0</span>)</span><br><span class="line">  &#123;</span><br><span class="line">  c_start=<span class="built_in">document</span>.cookie.indexOf(c_name + <span class="string">"="</span>)</span><br><span class="line">  <span class="keyword">if</span> (c_start!=<span class="number">-1</span>)</span><br><span class="line">    &#123; </span><br><span class="line">    c_start=c_start + c_name.length+<span class="number">1</span> </span><br><span class="line">    c_end=<span class="built_in">document</span>.cookie.indexOf(<span class="string">";"</span>,c_start)</span><br><span class="line">    <span class="keyword">if</span> (c_end==<span class="number">-1</span>) c_end=<span class="built_in">document</span>.cookie.length</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">unescape</span>(<span class="built_in">document</span>.cookie.substring(c_start,c_end))</span><br><span class="line">    &#125; </span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">return</span> <span class="string">""</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setCookie</span>(<span class="params">c_name,value,expiredays</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">var</span> exdate=<span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">exdate.setDate(exdate.getDate()+expiredays)</span><br><span class="line"><span class="built_in">document</span>.cookie=c_name+ <span class="string">"="</span> +<span class="built_in">escape</span>(value)+</span><br><span class="line">((expiredays==<span class="literal">null</span>) ? <span class="string">""</span> : <span class="string">";expires="</span>+exdate.toGMTString())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkCookie</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">username=getCookie(<span class="string">'username'</span>)</span><br><span class="line"><span class="keyword">if</span> (username!=<span class="literal">null</span> &amp;&amp; username!=<span class="string">""</span>)</span><br><span class="line">  &#123;alert(<span class="string">'Welcome again '</span>+username+<span class="string">'!'</span>)&#125;</span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">  &#123;</span><br><span class="line">  username=prompt(<span class="string">'Please enter your name:'</span>,<span class="string">""</span>)</span><br><span class="line">  <span class="keyword">if</span> (username!=<span class="literal">null</span> &amp;&amp; username!=<span class="string">""</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    setCookie(<span class="string">'username'</span>,username,<span class="number">365</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;body onLoad="checkCookie()"&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="常知小技巧"><a class="markdownIt-Anchor" href="#常知小技巧"></a> 常知小技巧</h4>
+<ul>
+<li>
+<p>对于任何类型的值采用双not ,可以得到其真正的boolean类型值 .   写法:      if(!!cont){}   [注:  有值就表示true , 没值或为false或为0就返回false]</p>
+</li>
+<li>
+<p>null 与 undefined 是相等的     if(null == undefined) {   返回true  } ,     [注:  非全等号由感叹号加两个等号（!==）表示，只有在无需类型转换运算数不相等的情况下，才返回 true。]</p>
+</li>
+<li>
+<p>start : i = 5;   可以以这样的方式给语句加个标签,  方面下面调用.</p>
+</li>
+<li>
+<p>js中文转码:  encodeURI(encodeURI(  //需要转码的内容 ))</p>
+</li>
+<li>
+<p>要想实现点击下拉框, 选中内容在文本框中显示, 并且支持多选  , 请百度搜索  multiple-select</p>
+</li>
+<li>
+<p>使用这种函数   var formData=$(“form”).serialize();    ,可以获取form表单中的参数和值, 以 name=2&amp;pass=3的 形式连接到一块</p>
+</li>
+</ul>
+<h4 id="arguments0-length-这些可以写在函数内部-arguments是系统命名的获取传进函数的变量的值的数组集合-可以不用声明直接在函数内部使用而只需要调用是传参数就行"><a class="markdownIt-Anchor" href="#arguments0-length-这些可以写在函数内部-arguments是系统命名的获取传进函数的变量的值的数组集合-可以不用声明直接在函数内部使用而只需要调用是传参数就行"></a> arguments[0]  .length  这些可以写在函数内部, arguments是系统命名的获取传进函数的变量的值的数组集合 , 可以不用声明,直接在函数内部使用,而只需要调用是传参数就行</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;a  href=<span class="string">"javascript:void(0);"</span>  onclick=<span class="string">"sayHi('',null,undefined)"</span>&gt;点击这里,调用函数&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">&lt;script tyee=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">         <span class="keyword">var</span>  num=<span class="built_in">arguments</span>.length;</span><br><span class="line">     <span class="keyword">if</span> (num != <span class="number">0</span>) &#123;<span class="comment">//调用传参函数</span></span><br><span class="line">        <span class="keyword">if</span>(num==<span class="number">1</span>)&#123;<span class="comment">//调用传一个参函数</span></span><br><span class="line">        </span><br><span class="line">           alert(<span class="string">"1个参数"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>  <span class="keyword">if</span>(num==<span class="number">2</span>)&#123;<span class="comment">//调用传2个参函数</span></span><br><span class="line">        </span><br><span class="line">           alert(<span class="string">"2个参数"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(num==<span class="number">3</span>)&#123;<span class="comment">//调用传3个参函数</span></span><br><span class="line">        </span><br><span class="line">           alert(<span class="string">"3个参数"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;<span class="comment">//调用传其他参函数</span></span><br><span class="line">        </span><br><span class="line">           alert(<span class="string">"3个以上参数"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;<span class="comment">//调用无参函数</span></span><br><span class="line">    </span><br><span class="line">        alert(<span class="string">"你没有往该函数里面传入任何值!!!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 注： 可以使用函数名.length, 来获取该函数传入参数的个数.</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="在函数中使用闭包-内部函数不能传参-但可以使用外部的一切变量"><a class="markdownIt-Anchor" href="#在函数中使用闭包-内部函数不能传参-但可以使用外部的一切变量"></a> 在函数中使用闭包 , 内部函数不能传参, 但可以使用外部的一切变量.</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iBaseNum = <span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addNum</span>(<span class="params">iNum1, iNum2</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doAdd</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  	  <span class="keyword">return</span> iNum1 + iNum2 + iBaseNum;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> doAdd();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="图像操作-详细请看附加图像文件"><a class="markdownIt-Anchor" href="#图像操作-详细请看附加图像文件"></a> 图像操作. (详细请看附加图像文件) ( )</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 图像 旋转 的函数</span></span><br><span class="line"><span class="keyword">var</span> irotation = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rotation</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="built_in">document</span>.all.IFramePic1.style.filter =<span class="string">"progid:DXImageTransform.Microsoft.BasicImage(rotation="</span>+ irotation  +<span class="string">")"</span>;</span><br><span class="line">   irotation++;</span><br><span class="line">   <span class="keyword">if</span>(irotation&gt;<span class="number">4</span>)</span><br><span class="line">      &#123;</span><br><span class="line">          irotation=<span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="使用js获取上月最后一天日期"><a class="markdownIt-Anchor" href="#使用js获取上月最后一天日期"></a> 使用js获取上月最后一天日期</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">  $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     <span class="keyword">var</span>   endAccountDate = <span class="built_in">document</span>.getElementById(<span class="string">"endAccountDate"</span>).value;</span><br><span class="line">     <span class="keyword">if</span>(endAccountDate==<span class="literal">null</span>||endAccountDate==<span class="string">''</span>)&#123;</span><br><span class="line">    	         <span class="keyword">var</span> nowdays = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    <span class="keyword">var</span> year = nowdays.getFullYear();</span><br><span class="line">    <span class="keyword">var</span> month = nowdays.getMonth();</span><br><span class="line">    <span class="keyword">if</span>(month==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        month=<span class="number">12</span>;</span><br><span class="line">        year=year<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (month &lt; <span class="number">10</span>) &#123;</span><br><span class="line">        month = <span class="string">"0"</span> + month;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> firstDay = year + <span class="string">"-"</span> + month + <span class="string">"-"</span> + <span class="string">"01"</span>;<span class="comment">//上个月的第一天</span></span><br><span class="line">    <span class="keyword">var</span> myDate = <span class="keyword">new</span> <span class="built_in">Date</span>(year, month, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">var</span> lastDay = year + <span class="string">"-"</span> + month + <span class="string">"-"</span> + myDate.getDate();<span class="comment">//上个月的最后一天</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Appendzero</span>(<span class="params">obj</span>) </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span>(obj&lt;<span class="number">10</span>) <span class="keyword">return</span> <span class="string">"0"</span> +<span class="string">""</span>+ obj;  </span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> obj;  </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resolveDayDate</span>(<span class="params">begin_Date,end_Date</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> beginDate = <span class="keyword">new</span> <span class="built_in">Date</span>(begin_Date.substring(<span class="number">0</span>,<span class="number">4</span>),begin_Date.substring(<span class="number">4</span>,<span class="number">6</span>)<span class="number">-1</span>,begin_Date.substring(<span class="number">6</span>,<span class="number">8</span>));</span><br><span class="line">	<span class="keyword">var</span> endDate = <span class="keyword">new</span> <span class="built_in">Date</span>(end_Date.substring(<span class="number">0</span>,<span class="number">4</span>),end_Date.substring(<span class="number">4</span>,<span class="number">6</span>)<span class="number">-1</span>,end_Date.substring(<span class="number">6</span>,<span class="number">8</span>));</span><br><span class="line">	beginDate.setDate(beginDate.getDate()+<span class="number">31</span>);</span><br><span class="line">	<span class="keyword">return</span> beginDate.getTime() &gt;= endDate.getTime();</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resolveMonthDate</span>(<span class="params">begin_Date,end_Date</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> beginDate = <span class="keyword">new</span>  <span class="built_in">Date</span>(begin_Date.substring(<span class="number">0</span>,<span class="number">4</span>),begin_Date.substring(<span class="number">4</span>,<span class="number">6</span>)<span class="number">-1</span>,begin_Date.substring(<span class="number">6</span>,<span class="number">8</span>));</span><br><span class="line">	<span class="keyword">var</span> endDate = <span class="keyword">new</span> <span class="built_in">Date</span>(end_Date.substring(<span class="number">0</span>,<span class="number">4</span>),end_Date.substring(<span class="number">4</span>,<span class="number">6</span>)<span class="number">-1</span>,end_Date.substring(<span class="number">6</span>,<span class="number">8</span>));</span><br><span class="line">	beginDate.setMonth(beginDate.getMonth()+<span class="number">12</span>);</span><br><span class="line">	<span class="keyword">return</span> beginDate.getTime() &gt;= endDate.getTime();</span><br><span class="line">&#125; </span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="获取当前日期上月最后一天"><a class="markdownIt-Anchor" href="#获取当前日期上月最后一天"></a> 获取当前日期上月最后一天</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">         <span class="keyword">var</span> fl=$(<span class="string">"#fl"</span>).val();</span><br><span class="line">         <span class="keyword">if</span>(fl==<span class="string">'0'</span>)&#123;</span><br><span class="line">            <span class="keyword">var</span>  endDate=$(<span class="string">"input[name='endAccountDate']"</span>).val();</span><br><span class="line">            <span class="keyword">var</span>  ss=ff(endDate);</span><br><span class="line">            $(<span class="string">"input[name='startAccountDate']"</span>).val(ss);</span><br><span class="line">          &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">ff</span>(<span class="params">endDate</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span>  month =  endDate.substr(<span class="number">4</span>,<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">var</span>  year = endDate.substr(<span class="number">0</span>,<span class="number">4</span>);</span><br><span class="line">    <span class="keyword">if</span>(month==<span class="string">'01'</span>)&#123;</span><br><span class="line">         month = <span class="number">12</span>;</span><br><span class="line">         year -=<span class="number">1</span>;</span><br><span class="line">     &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">         month -=<span class="number">1</span>;</span><br><span class="line">         &#125;</span><br><span class="line">    <span class="keyword">var</span> day = <span class="keyword">new</span> <span class="built_in">Date</span>(year, month, <span class="number">0</span>).getDate();</span><br><span class="line">    <span class="keyword">return</span>   year+<span class="string">""</span>+Appendzero(month)+<span class="string">""</span>+Appendzero(day);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Appendzero</span>(<span class="params">obj</span>)  </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span>(obj&lt;<span class="number">10</span>) <span class="keyword">return</span> <span class="string">"0"</span> +<span class="string">""</span>+ obj;  </span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> obj;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="内容相对于滚动条位置不动"><a class="markdownIt-Anchor" href="#内容相对于滚动条位置不动"></a> 内容相对于滚动条位置不动</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> screenSize = <span class="built_in">window</span>.screen.width<span class="number">-200</span>;</span><br><span class="line">	<span class="keyword">var</span> div1 = <span class="built_in">document</span>.getElementById(<span class="string">'pool'</span>);    </span><br><span class="line">	div1.style.width = screenSize;	</span><br><span class="line">&#125;);</span><br><span class="line">&lt;div id=<span class="string">"pool"</span> style=<span class="string">"overflow: auto;"</span>&gt; </span><br><span class="line">      <span class="comment">//要优化的内容</span></span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="悬浮动态走马灯"><a class="markdownIt-Anchor" href="#悬浮动态走马灯"></a> 悬浮动态走马灯</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;marquee style=<span class="string">"WIDTH: 100%; HEIGHT: 400px"</span> scrollamount=<span class="string">"3"</span></span><br><span class="line">	direction=<span class="string">"up"</span>&gt; <span class="xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"color: red; font-size: 20px;"</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>页面维护中..<span class="tag">&lt;/<span class="name">strong</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/marquee&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="下拉框多选select-在下拉框中添加-multiplemultiple-属性"><a class="markdownIt-Anchor" href="#下拉框多选select-在下拉框中添加-multiplemultiple-属性"></a> 下拉框多选[select]  ,  在下拉框中添加 multiple=“multiple” 属性</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// js代码</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">subbmit</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> all = <span class="string">""</span>; </span><br><span class="line">	 $(<span class="string">"select[name='orgId'] option"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">		    all += $(<span class="keyword">this</span>).attr(<span class="string">"value"</span>)+<span class="string">" "</span>; </span><br><span class="line">	 &#125;); </span><br><span class="line">	 <span class="keyword">var</span> sel = $(<span class="string">"select[name='orgId']"</span>).val(); </span><br><span class="line">	 alert(<span class="string">"多选列表所有的值是:  "</span> + all + <span class="string">"其中被选中的是"</span>+sel+<span class="string">"。); </span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用javascript操作excel"><a class="markdownIt-Anchor" href="#使用javascript操作excel"></a> 使用javascript操作excel</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;</span><br><span class="line">            New Document</span><br><span class="line">        &lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">        &lt;meta name="Generator" content="EditPlus"&gt;</span></span><br><span class="line"><span class="regexp">        &lt;meta name="Author" content=""&gt;</span></span><br><span class="line"><span class="regexp">        &lt;meta name="Keywords" content=""&gt;</span></span><br><span class="line"><span class="regexp">        &lt;meta name="Description" content=""&gt;</span></span><br><span class="line"><span class="regexp">        &lt;script type="text/</span>javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">        	  var array1 = [];</span></span><br><span class="line"><span class="string">            var arr;</span></span><br><span class="line"><span class="string">            function WriteExcel() &#123;</span></span><br><span class="line"><span class="string">                var tempStr = "</span><span class="string">";</span></span><br><span class="line"><span class="string">                //得到文件路径的值  </span></span><br><span class="line"><span class="string">                var filePath = document.getElementById("</span>upfile<span class="string">").value;</span></span><br><span class="line"><span class="string">                //创建操作EXCEL应用程序的实例  </span></span><br><span class="line"><span class="string">                try &#123;</span></span><br><span class="line"><span class="string">                    var oXL = new ActiveXObject("</span>Excel.application<span class="string">");</span></span><br><span class="line"><span class="string">                &#125; catch(e) &#123;</span></span><br><span class="line"><span class="string">                    alert("</span>请启用ActiveX控件设置！<span class="string">");</span></span><br><span class="line"><span class="string">                    return;</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">                //打开指定路径的excel文件  </span></span><br><span class="line"><span class="string">                var oWB = oXL.Workbooks.open(filePath);</span></span><br><span class="line"><span class="string">                //操作第一个sheet(从一开始，而非零)  </span></span><br><span class="line"><span class="string">                oWB.worksheets(1).select();</span></span><br><span class="line"><span class="string">                var oSheet = oWB.ActiveSheet;</span></span><br><span class="line"><span class="string">                //使用的行数  </span></span><br><span class="line"><span class="string">                var rows = oSheet.usedrange.rows.count;</span></span><br><span class="line"><span class="string">                try &#123;</span></span><br><span class="line"><span class="string">                    for (var i = 1; i &lt;= rows; i++) &#123;</span></span><br><span class="line"><span class="string">                        var obj = new Object();</span></span><br><span class="line"><span class="string">                        obj.seq =    oSheet.Cells(i,1).value; </span></span><br><span class="line"><span class="string">												obj.jgmc=    oSheet.Cells(i,2).value;  </span></span><br><span class="line"><span class="string">												obj.wdmc=    oSheet.Cells(i,3).value;  </span></span><br><span class="line"><span class="string">												obj.wddm=    oSheet.Cells(i,4).value;  </span></span><br><span class="line"><span class="string">												obj.ywpz=    oSheet.Cells(i,5).value;  </span></span><br><span class="line"><span class="string">												obj.hdmx=    oSheet.Cells(i,6).value;  </span></span><br><span class="line"><span class="string">												obj.cccy=    oSheet.Cells(i,7).value;  </span></span><br><span class="line"><span class="string">												obj.cccyfb=  oSheet.Cells(i,8).value;  </span></span><br><span class="line"><span class="string">												obj.sjkm=    oSheet.Cells(i,9).value;  </span></span><br><span class="line"><span class="string">												obj.cclx=    oSheet.Cells(i,10).value; </span></span><br><span class="line"><span class="string">												obj.cccjrq=  oSheet.Cells(i,11).value; </span></span><br><span class="line"><span class="string">												obj.ywrq=    oSheet.Cells(i,12).value; </span></span><br><span class="line"><span class="string">												obj.ccy=     oSheet.Cells(i,13).value; </span></span><br><span class="line"><span class="string">												obj.sjje=    oSheet.Cells(i,14).value; </span></span><br><span class="line"><span class="string">												                                       </span></span><br><span class="line"><span class="string">                        array1.push(obj);</span></span><br><span class="line"><span class="string">                        obj=null;</span></span><br><span class="line"><span class="string">                    &#125;</span></span><br><span class="line"><span class="string">                    arr =   JSON.stringify(array1);</span></span><br><span class="line"><span class="string">                &#125; catch(e) &#123;</span></span><br><span class="line"><span class="string">                    document.getElementById("</span>txtArea<span class="string">").value = "</span>出错了<span class="string">";</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">                document.getElementById("</span>txtArea<span class="string">").value = arr;</span></span><br><span class="line"><span class="string">                //退出操作excel的实例对象  </span></span><br><span class="line"><span class="string">                oXL.Application.Quit();</span></span><br><span class="line"><span class="string">                //手动调用垃圾收集器  </span></span><br><span class="line"><span class="string">                CollectGarbage();</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">            function   ReadExcel()&#123;</span></span><br><span class="line"><span class="string">            	alert(array1[1].jgmc); </span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &lt;/script&gt;</span></span><br><span class="line"><span class="string">    &lt;/head&gt;</span></span><br><span class="line"><span class="string">    &lt;body&gt;</span></span><br><span class="line"><span class="string">        &lt;input type="</span>file<span class="string">" id="</span>upfile<span class="string">" /&gt;</span></span><br><span class="line"><span class="string">        &lt;input type="</span>button<span class="string">" onclick="</span>WriteExcel();<span class="string">" value="</span>write<span class="string">"&gt;</span></span><br><span class="line"><span class="string">         &lt;input type="</span>button<span class="string">" onclick="</span>ReadExcel();<span class="string">" value="</span>read<span class="string">"&gt;</span></span><br><span class="line"><span class="string">        &lt;br&gt;</span></span><br><span class="line"><span class="string">        &lt;textarea id="</span>txtArea<span class="string">" cols=200 rows=400&gt;</span></span><br><span class="line"><span class="string">        &lt;/textarea&gt;</span></span><br><span class="line"><span class="string">    &lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+<p>未完待续， 后续补充中。。。。。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/header.jpg" alt="小小 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>行走在路上。。。。。</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>是否对您有帮助？举起小手赞赏一下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatmoney.jpg" alt="小小 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zifubaomoney.jpg" alt="小小 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="../../../../../tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../hexo总结/" rel="next" title="Hexo 主题介绍">
+                <i class="fa fa-chevron-left"></i> Hexo 主题介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../kafka集群环境搭建/" rel="prev" title="Kafka集群环境搭建">
+                Kafka集群环境搭建 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="../../../../../images/header.jpg"
+                alt="小小" />
+            
+              <p class="site-author-name" itemprop="name">小小</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="../../../../../archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="../../../../../atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yourname" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yourname@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/yourname" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://jjeian.github.io" title="漫步小楼```" target="_blank">漫步小楼```</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/weixin_31629877" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用javascript小案例"><span class="nav-number">1.</span> <span class="nav-text"> 常用javascript小案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#样式调节"><span class="nav-number">1.0.1.</span> <span class="nav-text"> 样式调节</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#点击radio-选择一整行这种写法不太靠谱可以试试"><span class="nav-number">1.0.2.</span> <span class="nav-text"> 点击radio  选择一整行(这种写法不太靠谱，可以试试)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#当前条件所在的行的颜色为红色"><span class="nav-number">1.0.3.</span> <span class="nav-text"> 当前条件所在的行的颜色为红色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#格式化金额"><span class="nav-number">1.0.4.</span> <span class="nav-text"> 格式化金额</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写弹窗标题div中需要加入的样式"><span class="nav-number">1.0.5.</span> <span class="nav-text"> 写弹窗(标题div中需要加入的样式)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#支持拖拽"><span class="nav-number">1.0.6.</span> <span class="nav-text"> 支持拖拽</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试用户点击关闭浏览器事件回到数据库中执行一条语句"><span class="nav-number">1.0.7.</span> <span class="nav-text"> 测试用户点击关闭浏览器,事件回到数据库中执行一条语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提交点击提交form表单值-则可以将结果显示在当前页面的iframe内联框中-实现页面局部刷新"><span class="nav-number">1.0.8.</span> <span class="nav-text"> 提交点击提交form表单值, 则可以将结果显示在当前页面的iframe内联框中, 实现页面局部刷新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图片响应流到页面展示-filepath-图片路径"><span class="nav-number">1.0.9.</span> <span class="nav-text"> 图片响应流到页面展示,  filepath = &quot;“图片路径”;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用js写cookie"><span class="nav-number">1.0.10.</span> <span class="nav-text"> 使用js写COOKIE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常知小技巧"><span class="nav-number">1.0.11.</span> <span class="nav-text"> 常知小技巧</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#arguments0-length-这些可以写在函数内部-arguments是系统命名的获取传进函数的变量的值的数组集合-可以不用声明直接在函数内部使用而只需要调用是传参数就行"><span class="nav-number">1.0.12.</span> <span class="nav-text"> arguments[0]  .length  这些可以写在函数内部, arguments是系统命名的获取传进函数的变量的值的数组集合 , 可以不用声明,直接在函数内部使用,而只需要调用是传参数就行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在函数中使用闭包-内部函数不能传参-但可以使用外部的一切变量"><span class="nav-number">1.0.13.</span> <span class="nav-text"> 在函数中使用闭包 , 内部函数不能传参, 但可以使用外部的一切变量.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图像操作-详细请看附加图像文件"><span class="nav-number">1.0.14.</span> <span class="nav-text"> 图像操作. (详细请看附加图像文件) ( )</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用js获取上月最后一天日期"><span class="nav-number">1.0.15.</span> <span class="nav-text"> 使用js获取上月最后一天日期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取当前日期上月最后一天"><span class="nav-number">1.0.16.</span> <span class="nav-text"> 获取当前日期上月最后一天</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内容相对于滚动条位置不动"><span class="nav-number">1.0.17.</span> <span class="nav-text"> 内容相对于滚动条位置不动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#悬浮动态走马灯"><span class="nav-number">1.0.18.</span> <span class="nav-text"> 悬浮动态走马灯</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下拉框多选select-在下拉框中添加-multiplemultiple-属性"><span class="nav-number">1.0.19.</span> <span class="nav-text"> 下拉框多选[select]  ,  在下拉框中添加 multiple=“multiple” 属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用javascript操作excel"><span class="nav-number">1.0.20.</span> <span class="nav-text"> 使用javascript操作excel</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">漫步小楼```</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">47.9k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+<p>
+   <span id="timeDate" style="font-size:10px;">载入天数...</span><span id="times" style="font-size:10px;">载入时分秒...</span>
+    <script>
+        var now = new Date();
+        function createtime() {
+            var grt= new Date("1/6/2019 01:10:00");//此处修改你的建站时间或者网站上线时间
+            now.setTime(now.getTime()+250);
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+            document.getElementById("timeDate").innerHTML = "本站已安全运行"+dnum+"天";
+            document.getElementById("times").innerHTML = hnum + "时" + mnum + "分" + snum + "秒";
+        }
+    setInterval("createtime()",250);
+    </script>
+</p>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('2');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":true,"model":{"jsonPath":"/live2dw/assets/Epsilon2.1.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script>
+</body>
+</html>

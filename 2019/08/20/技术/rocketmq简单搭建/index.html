@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="技术," />
+
+
+
+
+
+  <link rel="alternate" href="../../../../../atom.xml" title="漫步小楼```" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="mq集群方式搭建 有段时间没写这些技术文章了， 今天抽空写一点，不然自己都快忘记了 这篇文章记录了rocketmq 集群方式搭建的过程， 也是自己半天的成果记录吧！ 感兴趣的朋友点个赞在走呗！ 好了，废话不多，下面开搞。 本文章参考https://blog.csdn.net/qq_35400008/article/details/82467562#comments 这个博客文章编写  准备工作">
+<meta name="keywords" content="技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mq集群方式搭建">
+<meta property="og:url" content="https://jjeian.github.io/2019/08/20/技术/rocketmq简单搭建/index.html">
+<meta property="og:site_name" content="漫步小楼```">
+<meta property="og:description" content="mq集群方式搭建 有段时间没写这些技术文章了， 今天抽空写一点，不然自己都快忘记了 这篇文章记录了rocketmq 集群方式搭建的过程， 也是自己半天的成果记录吧！ 感兴趣的朋友点个赞在走呗！ 好了，废话不多，下面开搞。 本文章参考https://blog.csdn.net/qq_35400008/article/details/82467562#comments 这个博客文章编写  准备工作">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019040222574667.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zMTYyOTg3Nw==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190402231033137.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190402231408475.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190402232247969.png">
+<meta property="og:updated_time" content="2019-08-20T05:21:50.181Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mq集群方式搭建">
+<meta name="twitter:description" content="mq集群方式搭建 有段时间没写这些技术文章了， 今天抽空写一点，不然自己都快忘记了 这篇文章记录了rocketmq 集群方式搭建的过程， 也是自己半天的成果记录吧！ 感兴趣的朋友点个赞在走呗！ 好了，废话不多，下面开搞。 本文章参考https://blog.csdn.net/qq_35400008/article/details/82467562#comments 这个博客文章编写  准备工作">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2019040222574667.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zMTYyOTg3Nw==,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jjeian.github.io/2019/08/20/技术/rocketmq简单搭建/"/>
+
+
+
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/custom/clicklove.js"></script>
+
+
+  <title>Mq集群方式搭建 | 漫步小楼```</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">漫步小楼```</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jjeian.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小小">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="../../../../../images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漫步小楼```">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mq集群方式搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-20T21:37:42+08:00">
+                2019-08-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-20T13:21:50+08:00">
+                2019-08-20
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../../categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span><i class="fa fa-eye"></i>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="mq集群方式搭建"><a class="markdownIt-Anchor" href="#mq集群方式搭建"></a> mq集群方式搭建</h2>
+<p>有段时间没写这些技术文章了， 今天抽空写一点，不然自己都快忘记了<br>
+这篇文章记录了rocketmq 集群方式搭建的过程， 也是自己半天的成果记录吧！ 感兴趣的朋友点个赞在走呗！</p>
+<p>好了，废话不多，下面开搞。</p>
+<p>本文章参考https://blog.csdn.net/qq_35400008/article/details/82467562#comments 这个博客文章编写</p>
+<h3 id="准备工作"><a class="markdownIt-Anchor" href="#准备工作"></a> 准备工作</h3>
+<p>第一步：关闭要搭建的所有机器的防火墙<br>
+第二步：每台机器执行下如下步骤</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@ma01</span> ~]<span class="meta"># vim /etc/sysconfig/selinux</span></span><br><span class="line">......</span><br><span class="line">SELINUX=disabled</span><br><span class="line">[root<span class="symbol">@ma01</span>~]<span class="meta"># setenforce 0</span></span><br><span class="line">[root<span class="symbol">@ma01</span>~]<span class="meta"># getenforce</span></span><br></pre></td></tr></table></figure>
+<p>第三步：所有机器装好jdk,  maven , zip , unzip , ssh 免密登录</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">配置crt连接： <span class="symbol">https:</span>/<span class="regexp">/blog.csdn.net/cmqwan</span><span class="regexp">/article/details</span><span class="regexp">/61932792</span></span><br><span class="line"><span class="regexp">安装maven参考老哥博客:  https:/</span><span class="regexp">/www.cnblogs.com/clicli</span><span class="regexp">/p/</span><span class="number">5866390</span>.html</span><br><span class="line">安装zip,unzip参考： <span class="symbol">http:</span>/<span class="regexp">/www.rpmfind.net/linux</span><span class="regexp">/rpm2html/search</span>.php?query=zip&amp;submit=Search+...&amp;system=&amp;arch=</span><br><span class="line">安装ssh参考： <span class="symbol">https:</span>/<span class="regexp">/blog.csdn.net/m</span>0_37590135/article/details/<span class="number">74275859</span></span><br><span class="line">jdk自己百度哈， 很多参考博客的！</span><br></pre></td></tr></table></figure>
+<p>第四步： 如下命令是ssh机器之间copy用的命令</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r /home/administrator/test/ <span class="symbol">root@</span><span class="number">192.168</span><span class="number">.1</span><span class="number">.100</span>:/root/</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/2019040222574667.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zMTYyOTg3Nw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>
+第五步： 下载完成后， 解压</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">unzip</span>  <span class="selector-tag">rocketmq-all-4</span><span class="selector-class">.4</span><span class="selector-class">.0-bin-release</span><span class="selector-class">.zip</span></span><br></pre></td></tr></table></figure>
+<p>第六步：进入解压后的文件夹rocketmq-bin4.4.0 ,  在文件夹里面新建logs , data/store, data2/store 目录<br>
+<img src="https://img-blog.csdnimg.cn/20190402231033137.png" alt="在这里插入图片描述"><br>
+第七步：安装顺序修改bin下面的几个启动文件， 因默认配置内存空间太大，本地启动会报错</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. vim runbroker.sh    对应地方更改为  -server -Xms512m -Xmx512m -Xmn256m</span><br><span class="line">2. vim runserver.sh (同样的道理） -server -Xms512m -Xmx512m -Xmn126m -XX:<span class="attribute">PermSize</span>=128m -XX:<span class="attribute">MaxPermSize</span>=320m</span><br><span class="line">3. vim tools.sh           -server -Xms256m -Xmx256m -Xmn128m -XX:<span class="attribute">PermSize</span>=128m -XX:<span class="attribute">MaxPermSize</span>=128m</span><br></pre></td></tr></table></figure>
+<p>第八步：到rocketmq-bin4.4.0/conf/2m-2s-async 下 修改这四个文件<br>
+<img src="https://img-blog.csdnimg.cn/20190402231408475.png" alt="在这里插入图片描述"></p>
+<h3 id="注-这里说明下哈-我是用了三台机器所有配置了130-131和132一样的你们2台机器完全可以用131和132配置一台就可以了哈ip自行更改哈"><a class="markdownIt-Anchor" href="#注-这里说明下哈-我是用了三台机器所有配置了130-131和132一样的你们2台机器完全可以用131和132配置一台就可以了哈ip自行更改哈"></a> 注： 这里说明下哈， 我是用了三台机器，所有配置了130， 131和132一样的，你们2台机器完全可以用，131和132配置一台就可以了哈，ip自行更改哈。</h3>
+<p>第九步： 130主机器修改如下配置文件，  broker-a.properties  broker-b-s.properties两个文件 内容分别如下<br>
+broker-a.properties</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">brokerClusterName</span>=RocketMQCluster</span><br><span class="line"><span class="attr">brokerName</span>=broker-a</span><br><span class="line"><span class="attr">brokerId</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">deleteWhen</span>=<span class="number">04</span></span><br><span class="line"><span class="attr">fileReservedTime</span>=<span class="number">48</span></span><br><span class="line"><span class="attr">brokerRole</span>=ASYNC_MASTER</span><br><span class="line"><span class="attr">flushDiskType</span>=ASYNC_FLUSH</span><br><span class="line"><span class="comment">##Broker 对外服务的监听端口</span></span><br><span class="line"><span class="attr">listenPort</span>=<span class="number">10911</span></span><br><span class="line"><span class="comment">#nameserver地址，分号分割</span></span><br><span class="line"><span class="attr">namesrvAddr</span>=<span class="number">192.168</span>.<span class="number">175.130</span>:<span class="number">9876</span>;<span class="number">192.168</span>.<span class="number">175.131</span>:<span class="number">9876</span>;<span class="number">192.168</span>.<span class="number">175.132</span>:<span class="number">9876</span></span><br><span class="line"><span class="comment">#在发送消息时，自动创建服务器不存在的topic，默认创建的队列数</span></span><br><span class="line"><span class="attr">defaultTopicQueueNums</span>=<span class="number">4</span></span><br><span class="line"><span class="comment">#是否允许 Broker 自动创建Topic，建议线下开启，线上关闭</span></span><br><span class="line"><span class="attr">autoCreateTopicEnable</span>=<span class="literal">true</span></span><br><span class="line"><span class="comment">#是否允许 Broker 自动创建订阅组，建议线下开启，线上关闭</span></span><br><span class="line"><span class="attr">autoCreateSubscriptionGroup</span>=<span class="literal">true</span></span><br><span class="line"><span class="attr">brokerIP1</span>=<span class="number">192.168</span>.<span class="number">175.130</span></span><br><span class="line"><span class="attr">storePathRootDir</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data/store</span><br><span class="line"><span class="attr">storePathCommitLog</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data/store/commitlog</span><br><span class="line"><span class="comment"># 消费队列存储路径存储路径</span></span><br><span class="line"><span class="attr">storePathConsumerQueue</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data/store/consumequeue</span><br><span class="line"><span class="comment">#消息索引存储路径</span></span><br><span class="line"><span class="attr">storePathIndex</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data/store/index</span><br><span class="line"><span class="comment">#checkpoint 文件存储路径</span></span><br><span class="line"><span class="attr">storeCheckpoint</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data/store/checkpoint</span><br><span class="line"><span class="comment">#abort 文件存储路径</span></span><br><span class="line"><span class="attr">abortFile</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data/store/abort</span><br><span class="line"><span class="comment">#删除文件时间点，默认凌晨 4点</span></span><br><span class="line"><span class="attr">deleteWhen</span>=<span class="number">04</span></span><br><span class="line"><span class="comment">#文件保留时间，默认 48 小时</span></span><br><span class="line"><span class="attr">fileReservedTime</span>=<span class="number">120</span></span><br><span class="line"><span class="comment"># commitLog每个文件的大小默认1G</span></span><br><span class="line"><span class="attr">mapedFileSizeCommitLog</span>=<span class="number">1073741824</span></span><br><span class="line"><span class="comment">#ConsumeQueue每个文件默认存300W条，根据业务情况调整</span></span><br><span class="line"><span class="attr">mapedFileSizeConsumeQueue</span>=<span class="number">3000000</span></span><br><span class="line"><span class="comment">#destroyMapedFileIntervalForcibly=120000</span></span><br><span class="line"><span class="comment">#redeleteHangedFileInterval=120000</span></span><br><span class="line"><span class="comment">#检测物理文件磁盘空间</span></span><br><span class="line"><span class="comment">#diskMaxUsedSpaceRatio=88</span></span><br></pre></td></tr></table></figure>
+<p>broker-b-s.properties</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">brokerClusterName</span>=RocketMQCluster</span><br><span class="line"><span class="attr">brokerName</span>=broker-b</span><br><span class="line"><span class="attr">brokerId</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">deleteWhen</span>=<span class="number">04</span></span><br><span class="line"><span class="attr">fileReservedTime</span>=<span class="number">48</span></span><br><span class="line"><span class="attr">brokerRole</span>=SLAVE</span><br><span class="line"><span class="attr">flushDiskType</span>=ASYNC_FLUSH</span><br><span class="line"><span class="attr">listenPort</span>=<span class="number">10921</span></span><br><span class="line"><span class="comment">#nameserver地址，分号分割</span></span><br><span class="line"><span class="attr">namesrvAddr</span>=<span class="number">192.168</span>.<span class="number">175.130</span>:<span class="number">9876</span>;<span class="number">192.168</span>.<span class="number">175.131</span>:<span class="number">9876</span>;<span class="number">192.168</span>.<span class="number">175.132</span>:<span class="number">9876</span></span><br><span class="line"><span class="attr">brokerIP1</span>=<span class="number">192.168</span>.<span class="number">175.130</span></span><br><span class="line"><span class="comment">#在发送消息时，自动创建服务器不存在的topic，默认创建的队列数</span></span><br><span class="line"><span class="attr">defaultTopicQueueNums</span>=<span class="number">4</span></span><br><span class="line"><span class="comment">#是否允许 Broker 自动创建Topic，建议线下开启，线上关闭</span></span><br><span class="line"><span class="attr">autoCreateTopicEnable</span>=<span class="literal">true</span></span><br><span class="line"><span class="comment">#是否允许 Broker 自动创建订阅组，建议线下开启，线上关闭</span></span><br><span class="line"><span class="attr">autoCreateSubscriptionGroup</span>=<span class="literal">true</span></span><br><span class="line"><span class="attr">storePathRootDir</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data2/store</span><br><span class="line"><span class="attr">storePathCommitLog</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data2/store/commitlog2</span><br><span class="line"><span class="comment"># 消费队列存储路径存储路径</span></span><br><span class="line"><span class="attr">storePathConsumerQueue</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data2/store/consumequeue2</span><br><span class="line"><span class="comment">#消息索引存储路径</span></span><br><span class="line"><span class="attr">storePathIndex</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data2/store/index2</span><br><span class="line"><span class="comment">#checkpoint 文件存储路径</span></span><br><span class="line"><span class="attr">storeCheckpoint</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data2/store/checkpoint2</span><br><span class="line"><span class="comment">#abort 文件存储路径</span></span><br><span class="line"><span class="attr">abortFile</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data2/store/abort2</span><br><span class="line"><span class="comment">#删除文件时间点，默认凌晨 4点</span></span><br><span class="line"><span class="attr">deleteWhen</span>=<span class="number">04</span></span><br><span class="line"><span class="comment">#文件保留时间，默认 48 小时</span></span><br><span class="line"><span class="attr">fileReservedTime</span>=<span class="number">120</span></span><br><span class="line"><span class="comment"># commitLog每个文件的大小默认1G</span></span><br><span class="line"><span class="attr">mapedFileSizeCommitLog</span>=<span class="number">1073741824</span></span><br><span class="line"><span class="comment">#ConsumeQueue每个文件默认存300W条，根据业务情况调整</span></span><br><span class="line"><span class="attr">mapedFileSizeConsumeQueue</span>=<span class="number">3000000</span></span><br><span class="line"><span class="comment">#destroyMapedFileIntervalForcibly=120000</span></span><br><span class="line"><span class="comment">#redeleteHangedFileInterval=120000</span></span><br><span class="line"><span class="comment">#检测物理文件磁盘空间</span></span><br><span class="line"><span class="comment">#diskMaxUsedSpaceRatio=88</span></span><br></pre></td></tr></table></figure>
+<p>第十步： 131， 132 机器只修改 broker-b.properties 和broker-a-s.properties 内容分别如下：<br>
+broker-b.properties</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># limitations under the License.</span></span><br><span class="line"><span class="attr">brokerClusterName</span>=RocketMQCluster</span><br><span class="line"><span class="attr">brokerName</span>=broker-b</span><br><span class="line"><span class="attr">brokerId</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">deleteWhen</span>=<span class="number">04</span></span><br><span class="line"><span class="attr">fileReservedTime</span>=<span class="number">48</span></span><br><span class="line"><span class="attr">brokerRole</span>=ASYNC_MASTER</span><br><span class="line"><span class="attr">flushDiskType</span>=ASYNC_FLUSH</span><br><span class="line"><span class="attr">listenPort</span>=<span class="number">10911</span></span><br><span class="line"><span class="comment">#nameserver地址，分号分割</span></span><br><span class="line"><span class="attr">namesrvAddr</span>=<span class="number">192.168</span>.<span class="number">175.130</span>:<span class="number">9876</span>;<span class="number">192.168</span>.<span class="number">175.131</span>:<span class="number">9876</span>;<span class="number">192.168</span>.<span class="number">175.132</span>:<span class="number">9876</span></span><br><span class="line"><span class="attr">brokerIP1</span>=<span class="number">192.168</span>.<span class="number">175.131</span></span><br><span class="line"><span class="comment">#在发送消息时，自动创建服务器不存在的topic，默认创建的队列数</span></span><br><span class="line"><span class="attr">defaultTopicQueueNums</span>=<span class="number">4</span></span><br><span class="line"><span class="comment">#是否允许 Broker 自动创建Topic，建议线下开启，线上关闭</span></span><br><span class="line"><span class="attr">autoCreateTopicEnable</span>=<span class="literal">true</span></span><br><span class="line"><span class="comment">#是否允许 Broker 自动创建订阅组，建议线下开启，线上关闭</span></span><br><span class="line"><span class="attr">autoCreateSubscriptionGroup</span>=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="attr">storePathRootDir</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data/store</span><br><span class="line"><span class="attr">storePathCommitLog</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data/store/commitlog</span><br><span class="line"><span class="comment"># 消费队列存储路径存储路径</span></span><br><span class="line"><span class="attr">storePathConsumerQueue</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data/store/consumequeue</span><br><span class="line"><span class="comment">#消息索引存储路径</span></span><br><span class="line"><span class="attr">storePathIndex</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data/store/index</span><br><span class="line"><span class="comment">#checkpoint 文件存储路径</span></span><br><span class="line"><span class="attr">storeCheckpoint</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data/store/checkpoint</span><br><span class="line"><span class="comment">#abort 文件存储路径</span></span><br><span class="line"><span class="attr">abortFile</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data/store/abort</span><br><span class="line"><span class="comment">#限制的消息大小</span></span><br><span class="line"><span class="attr">maxMessageSize</span>=<span class="number">65536</span></span><br><span class="line"><span class="comment">#flushCommitLogLeastPages=4</span></span><br><span class="line"><span class="comment">#flushConsumeQueueLeastPages=2</span></span><br><span class="line"><span class="comment">#flushCommitLogThoroughInterval=10000</span></span><br><span class="line"><span class="comment">#flushConsumeQueueThoroughInterval=60000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除文件时间点，默认凌晨 4点</span></span><br><span class="line"><span class="attr">deleteWhen</span>=<span class="number">04</span></span><br><span class="line"><span class="comment">#文件保留时间，默认 48 小时</span></span><br><span class="line"><span class="attr">fileReservedTime</span>=<span class="number">120</span></span><br><span class="line"><span class="comment"># commitLog每个文件的大小默认1G</span></span><br><span class="line"><span class="attr">mapedFileSizeCommitLog</span>=<span class="number">1073741824</span></span><br><span class="line"><span class="comment">#ConsumeQueue每个文件默认存300W条，根据业务情况调整</span></span><br><span class="line"><span class="attr">mapedFileSizeConsumeQueue</span>=<span class="number">3000000</span></span><br><span class="line"><span class="comment">#destroyMapedFileIntervalForcibly=120000</span></span><br><span class="line"><span class="comment">#redeleteHangedFileInterval=120000</span></span><br><span class="line"><span class="comment">#检测物理文件磁盘空间</span></span><br><span class="line"><span class="comment">#diskMaxUsedSpaceRatio=88</span></span><br></pre></td></tr></table></figure>
+<p>broker-a-s.properties</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># limitations under the License.</span></span><br><span class="line"><span class="attr">brokerClusterName</span>=RocketMQCluster</span><br><span class="line"><span class="attr">brokerName</span>=broker-a</span><br><span class="line"><span class="attr">brokerId</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">deleteWhen</span>=<span class="number">04</span></span><br><span class="line"><span class="attr">fileReservedTime</span>=<span class="number">48</span></span><br><span class="line"><span class="attr">brokerRole</span>=SLAVE</span><br><span class="line"><span class="attr">flushDiskType</span>=ASYNC_FLUSH</span><br><span class="line"></span><br><span class="line"><span class="attr">listenPort</span>=<span class="number">10921</span></span><br><span class="line"><span class="attr">namesrvAddr</span>=<span class="number">192.168</span>.<span class="number">175.130</span>:<span class="number">9876</span>;<span class="number">192.168</span>.<span class="number">175.131</span>:<span class="number">9876</span>;<span class="number">192.168</span>.<span class="number">175.132</span>:<span class="number">9876</span></span><br><span class="line"><span class="attr">brokerIP1</span>=<span class="number">192.168</span>.<span class="number">175.131</span></span><br><span class="line"><span class="comment">#在发送消息时，自动创建服务器不存在的topic，默认创建的队列数</span></span><br><span class="line"><span class="attr">defaultTopicQueueNums</span>=<span class="number">4</span></span><br><span class="line"><span class="comment">#是否允许 Broker 自动创建Topic，建议线下开启，线上关闭</span></span><br><span class="line"><span class="attr">autoCreateTopicEnable</span>=<span class="literal">true</span></span><br><span class="line"><span class="comment">#是否允许 Broker 自动创建订阅组，建议线下开启，线上关闭</span></span><br><span class="line"><span class="attr">autoCreateSubscriptionGroup</span>=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="attr">storePathRootDir</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data2/store</span><br><span class="line"><span class="attr">storePathCommitLog</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data2/store/commitlog</span><br><span class="line"><span class="comment"># 消费队列存储路径存储路径</span></span><br><span class="line"><span class="attr">storePathConsumerQueue</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data2/store/consumequeue</span><br><span class="line"><span class="comment">#消息索引存储路径</span></span><br><span class="line"><span class="attr">storePathIndex</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data2/store/index</span><br><span class="line"><span class="comment">#checkpoint 文件存储路径</span></span><br><span class="line"><span class="attr">storeCheckpoint</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data2/store/checkpoint</span><br><span class="line"><span class="comment">#abort 文件存储路径</span></span><br><span class="line"><span class="attr">abortFile</span>=/opt/local/data/install/rocketmq-bin4.<span class="number">4.0</span>/data2/store/abort</span><br><span class="line"><span class="comment">#限制的消息大小</span></span><br><span class="line"><span class="attr">maxMessageSize</span>=<span class="number">65536</span></span><br><span class="line"><span class="comment">#flushCommitLogLeastPages=4</span></span><br><span class="line"><span class="comment">#flushConsumeQueueLeastPages=2</span></span><br><span class="line"><span class="comment">#flushCommitLogThoroughInterval=10000</span></span><br><span class="line"><span class="comment">#flushConsumeQueueThoroughInterval=60000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除文件时间点，默认凌晨 4点</span></span><br><span class="line"><span class="attr">deleteWhen</span>=<span class="number">04</span></span><br><span class="line"><span class="comment">#文件保留时间，默认 48 小时</span></span><br><span class="line"><span class="attr">fileReservedTime</span>=<span class="number">120</span></span><br><span class="line"><span class="comment"># commitLog每个文件的大小默认1G</span></span><br><span class="line"><span class="attr">mapedFileSizeCommitLog</span>=<span class="number">1073741824</span></span><br><span class="line"><span class="comment">#ConsumeQueue每个文件默认存30W条，根据业务情况调整</span></span><br><span class="line"><span class="attr">mapedFileSizeConsumeQueue</span>=<span class="number">300000</span></span><br><span class="line"><span class="comment">#destroyMapedFileIntervalForcibly=120000</span></span><br><span class="line"><span class="comment">#redeleteHangedFileInterval=120000</span></span><br><span class="line"><span class="comment">#检测物理文件磁盘空间</span></span><br><span class="line"><span class="comment">#diskMaxUsedSpaceRatio=88</span></span><br></pre></td></tr></table></figure>
+<p>第十一步： 启动</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">三台都执行：</span><br><span class="line"></span><br><span class="line">nohup sh bin/mqnamesrv &gt; ./logs/namesrvrun<span class="selector-class">.log</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span> &amp;</span><br><span class="line"></span><br><span class="line"><span class="number">130</span>机器执行： </span><br><span class="line">nohup sh bin/mqbroker -c conf/<span class="number">2</span>m-<span class="number">2s</span>-async/broker-<span class="selector-tag">a</span><span class="selector-class">.properties</span> -n<span class="string">"192.168.175.130:9876;192.168.175.131:9876;192.168.175.132:9876"</span> &gt; ./logs/broker-<span class="selector-tag">a</span><span class="selector-class">.log</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span> &amp;</span><br><span class="line"></span><br><span class="line">nohup sh bin/mqbroker -c conf/<span class="number">2</span>m-<span class="number">2s</span>-async/broker-b-s<span class="selector-class">.properties</span> -n<span class="string">"192.168.175.130:9876;192.168.175.131:9876;192.168.175.132:9876"</span> &gt; ./logs/broker-b-s<span class="selector-class">.log</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span> &amp;</span><br><span class="line"></span><br><span class="line"><span class="number">131</span>， <span class="number">132</span> 机器执行：</span><br><span class="line">nohup sh bin/mqbroker -c conf/<span class="number">2</span>m-<span class="number">2s</span>-async/broker-<span class="selector-tag">b</span><span class="selector-class">.properties</span>  -n<span class="string">"192.168.175.130:9876;192.168.175.131:9876;192.168.175.132:9876"</span> &gt; ./logs/broker-<span class="selector-tag">b</span><span class="selector-class">.log</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span> &amp;</span><br><span class="line"></span><br><span class="line">nohup sh bin/mqbroker -c conf/<span class="number">2</span>m-<span class="number">2s</span>-async/broker-a-s<span class="selector-class">.properties</span> -n<span class="string">"192.168.175.130:9876;192.168.175.131:9876;192.168.175.132:9876"</span> &gt; ./logs/broker-a-s<span class="selector-class">.log</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span> &amp;</span><br></pre></td></tr></table></figure>
+<p>执行之后，jps结果，有两个brokerstartup就行了， 如果报错的化，看下自己建的logs文件夹日志<br>
+<img src="https://img-blog.csdnimg.cn/20190402232247969.png" alt="在这里插入图片描述"></p>
+<h4 id="好了到此rocketmq-基础配置就搭建起来了下面在讲一讲实战代码"><a class="markdownIt-Anchor" href="#好了到此rocketmq-基础配置就搭建起来了下面在讲一讲实战代码"></a> 好了，到此rocketmq 基础配置就搭建起来了，下面在讲一讲实战代码</h4>
+<hr>
+<h3 id="导入依赖包"><a class="markdownIt-Anchor" href="#导入依赖包"></a> 导入依赖包</h3>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.apache.rocketmq/rocketmq-client --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.rocketmq<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>rocketmq-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>4.4.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.rocketmq<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>rocketmq-all<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.qos.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logback-classic<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ch.qos.logback<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>logback-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>4.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="mq消息发送方"><a class="markdownIt-Anchor" href="#mq消息发送方"></a> mq消息发送方</h3>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> java.io.UnsupportedEncodingException;</span></span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> org.apache.rocketmq.client.exception.MQBrokerException;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> org.apache.rocketmq.client.exception.MQClientException;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> org.apache.rocketmq.client.producer.DefaultMQProducer;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> org.apache.rocketmq.client.producer.SendResult;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> org.apache.rocketmq.common.message.Message;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> org.apache.rocketmq.remoting.common.RemotingHelper;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> org.apache.rocketmq.remoting.exception.RemotingException;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 消息发送者</span></span><br><span class="line"><span class="comment"> * @author LELE</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Producer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) throws MQClientException, InterruptedException &#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 声明并初始化一个producer</span></span><br><span class="line">		<span class="comment">// 需要一个producer group名字作为构造方法的参数，这里为producer1</span></span><br><span class="line">		DefaultMQProducer producer = <span class="keyword">new</span> DefaultMQProducer(<span class="string">"producer1"</span>);</span><br><span class="line">		producer.setVipChannelEnabled(<span class="literal">false</span>);</span><br><span class="line">		<span class="comment">// 设置NameServer地址,此处应改为实际NameServer地址，多个地址之间用；分隔</span></span><br><span class="line">		<span class="comment">// NameServer的地址必须有</span></span><br><span class="line">		<span class="comment">// producer.setClientIP("xxxx");</span></span><br><span class="line">		<span class="comment">// producer.setInstanceName("Producer");</span></span><br><span class="line">		producer.setNamesrvAddr(<span class="string">"192.168.175.130:9876;192.168.175.131:9876;192.168.175.132:9876"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 调用start()方法启动一个producer实例</span></span><br><span class="line">		producer.start();</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 发送1条消息到Topic为TopicTest，tag为TagA，消息内容为“Hello RocketMQ”拼接上i的值</span></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">for</span>(int i=<span class="number">0</span>;i&lt;<span class="number">30000</span>;i++) &#123;</span><br><span class="line">				<span class="comment">// 封装消息</span></span><br><span class="line">				Message msg = <span class="keyword">new</span> Message(<span class="string">"TopicTest"</span>, <span class="comment">// topic</span></span><br><span class="line">						<span class="string">"TagA"</span>, <span class="comment">// tag</span></span><br><span class="line">						(<span class="string">"Hello RocketMQ--------"</span>+i).getBytes(RemotingHelper.DEFAULT_CHARSET)<span class="comment">// body</span></span><br><span class="line">				);</span><br><span class="line">				<span class="comment">// 调用producer的send()方法发送消息</span></span><br><span class="line">				<span class="comment">// 这里调用的是同步的方式，所以会有返回结果</span></span><br><span class="line">				SendResult sendResult = producer.send(msg);</span><br><span class="line">				<span class="comment">// 打印返回结果</span></span><br><span class="line">				System.out.println(sendResult);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125; <span class="keyword">catch</span> (RemotingException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (MQBrokerException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 发送完消息之后，调用shutdown()方法关闭producer</span></span><br><span class="line">		System.out.println(<span class="string">"send success"</span>);</span><br><span class="line">		producer.shutdown();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="消息消费者"><a class="markdownIt-Anchor" href="#消息消费者"></a> 消息消费者</h3>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;</span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;</span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;</span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;</span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.client.exception.MQClientException;</span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.common.consumer.ConsumeFromWhere;</span><br><span class="line"><span class="keyword">import</span> org.apache.rocketmq.common.message.MessageExt;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 消息接收者， 需要服务器启动mq服务</span></span><br><span class="line"><span class="comment"> * @author LELE</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Consumer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> void main(<span class="type">String</span>[] args) <span class="keyword">throws</span> <span class="type">MQClientException</span> &#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 声明并初始化一个consumer</span></span><br><span class="line">		<span class="comment">// 需要一个consumer group名字作为构造方法的参数，这里为consumer1</span></span><br><span class="line">		<span class="type">DefaultMQPushConsumer</span> consumer = new <span class="type">DefaultMQPushConsumer</span>(<span class="string">"consumer1"</span>);</span><br><span class="line">		<span class="comment">// consumer.setVipChannelEnabled(false);</span></span><br><span class="line">		<span class="comment">// 同样也要设置NameServer地址</span></span><br><span class="line">		consumer.setNamesrvAddr(<span class="string">"192.168.175.130:9876;192.168.175.131:9876;192.168.175.132:9876"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 这里设置的是一个consumer的消费策略</span></span><br><span class="line">		<span class="comment">// CONSUME_FROM_LAST_OFFSET 默认策略，从该队列最尾开始消费，即跳过历史消息</span></span><br><span class="line">		<span class="comment">// CONSUME_FROM_FIRST_OFFSET 从队列最开始开始消费，即历史消息（还储存在broker的）全部消费一遍</span></span><br><span class="line">		<span class="comment">// CONSUME_FROM_TIMESTAMP 从某个时间点开始消费，和setConsumeTimestamp()配合使用，默认是半个小时以前</span></span><br><span class="line">		consumer.setConsumeFromWhere(<span class="type">ConsumeFromWhere</span>.<span class="type">CONSUME_FROM_FIRST_OFFSET</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 设置consumer所订阅的Topic和Tag，*代表全部的Tag</span></span><br><span class="line">		consumer.subscribe(<span class="string">"TopicTest"</span>, <span class="string">"*"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 设置一个Listener，主要进行消息的逻辑处理</span></span><br><span class="line">		consumer.registerMessageListener(new <span class="type">MessageListenerConcurrently</span>() &#123;</span><br><span class="line"></span><br><span class="line">			@<span class="type">Override</span></span><br><span class="line">			<span class="keyword">public</span> <span class="type">ConsumeConcurrentlyStatus</span> consumeMessage(<span class="type">List</span>&lt;<span class="type">MessageExt</span>&gt; msgs, <span class="type">ConsumeConcurrentlyContext</span> context) &#123;</span><br><span class="line"></span><br><span class="line">				<span class="type">MessageExt</span> msg = msgs.<span class="keyword">get</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span> (msg.getTopic().equals(<span class="string">"TopicTest"</span>)) &#123;</span><br><span class="line"></span><br><span class="line">					<span class="comment">// 执行TopicTest1的消费逻辑</span></span><br><span class="line"></span><br><span class="line">					<span class="type">System</span>.out.<span class="built_in">println</span>(<span class="string">"TagA:"</span> + new <span class="type">String</span>(msg.getBody()));</span><br><span class="line"></span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				<span class="type">System</span>.out.<span class="built_in">println</span>(<span class="type">Thread</span>.currentThread().getName() + <span class="string">" Receive New Messages: "</span> + msgs.size()</span><br><span class="line">						+ <span class="string">"----------------------------------------------------------------------------------"</span>);</span><br><span class="line">				<span class="comment">// 返回消费状态</span></span><br><span class="line">				<span class="comment">// CONSUME_SUCCESS 消费成功</span></span><br><span class="line">				<span class="comment">// RECONSUME_LATER 消费失败，需要稍后重新消费</span></span><br><span class="line">				<span class="keyword">return</span> <span class="type">ConsumeConcurrentlyStatus</span>.<span class="type">CONSUME_SUCCESS</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="comment">// 调用start()方法启动consumer</span></span><br><span class="line">		consumer.start();</span><br><span class="line">		<span class="type">System</span>.out.<span class="built_in">println</span>(<span class="string">"Consumer Started."</span>);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>启动开始尽情玩耍吧，少年， 记得点赞哦！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/header.jpg" alt="小小 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>行走在路上。。。。。</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>是否对您有帮助？举起小手赞赏一下</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatmoney.jpg" alt="小小 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/zifubaomoney.jpg" alt="小小 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="../../../../../tags/技术/" rel="tag"># 技术</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../oracle经典语法/" rel="next" title="Oracle经典语法">
+                <i class="fa fa-chevron-left"></i> Oracle经典语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../模仿多ip并发访问/" rel="prev" title="Java模拟多ip请求">
+                Java模拟多ip请求 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="../../../../../images/header.jpg"
+                alt="小小" />
+            
+              <p class="site-author-name" itemprop="name">小小</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="../../../../../archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="../../../../../atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yourname" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yourname@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/yourname" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/yourname" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://jjeian.github.io" title="漫步小楼```" target="_blank">漫步小楼```</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/weixin_31629877" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mq集群方式搭建"><span class="nav-number">1.</span> <span class="nav-text"> mq集群方式搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">1.1.</span> <span class="nav-text"> 准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注-这里说明下哈-我是用了三台机器所有配置了130-131和132一样的你们2台机器完全可以用131和132配置一台就可以了哈ip自行更改哈"><span class="nav-number">1.2.</span> <span class="nav-text"> 注： 这里说明下哈， 我是用了三台机器，所有配置了130， 131和132一样的，你们2台机器完全可以用，131和132配置一台就可以了哈，ip自行更改哈。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#好了到此rocketmq-基础配置就搭建起来了下面在讲一讲实战代码"><span class="nav-number">1.2.1.</span> <span class="nav-text"> 好了，到此rocketmq 基础配置就搭建起来了，下面在讲一讲实战代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入依赖包"><span class="nav-number">1.3.</span> <span class="nav-text"> 导入依赖包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mq消息发送方"><span class="nav-number">1.4.</span> <span class="nav-text"> mq消息发送方</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息消费者"><span class="nav-number">1.5.</span> <span class="nav-text"> 消息消费者</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">漫步小楼```</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">47.9k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+<p>
+   <span id="timeDate" style="font-size:10px;">载入天数...</span><span id="times" style="font-size:10px;">载入时分秒...</span>
+    <script>
+        var now = new Date();
+        function createtime() {
+            var grt= new Date("1/6/2019 01:10:00");//此处修改你的建站时间或者网站上线时间
+            now.setTime(now.getTime()+250);
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+            document.getElementById("timeDate").innerHTML = "本站已安全运行"+dnum+"天";
+            document.getElementById("times").innerHTML = hnum + "时" + mnum + "分" + snum + "秒";
+        }
+    setInterval("createtime()",250);
+    </script>
+</p>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('2');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":true,"model":{"jsonPath":"/live2dw/assets/Epsilon2.1.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script>
+</body>
+</html>
