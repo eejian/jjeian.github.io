@@ -2038,7 +2038,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d75de9;
+  background: #ff7cb0;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2870,16 +2870,11 @@ embed {
   display: inline-block;
 }
 .sidebar {
-  background: url("/images/background.jpeg") no-repeat !important;
   background-size: cover !important;
   position: fixed !important;
   right: 0 !important;
   top: 0 !important;
   bottom: 0 !important;
-  color: #fff !important;
-}
-.sidebar a {
-  color: #fff !important;
 }
 * {
   cursor: url("http://om8u46rmb.bkt.clouddn.com/sword2.ico"), auto !important;
